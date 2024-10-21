@@ -36,7 +36,7 @@ object Task1 {
   }
 
   def p2p_length(x1:Double, y1:Double)(x2:Double, y2:Double): Double = {
-    Math.sqrt(Math.pow((x2-x1),2) + Math.pow((y2-y1),2))
+    Math.sqrt(Math.pow((x2-x1),2) + Math.pow((y2-y1),2)) //формула расстояния между точками
   }
 
 }
