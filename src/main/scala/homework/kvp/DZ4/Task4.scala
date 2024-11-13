@@ -56,7 +56,7 @@ object Task4 extends App{
           case Error(name, msg) => println(Error(name, msg).getmsg())
           case Inform(name, msg) => println(Inform(name, msg).getmsg())
           case Exception(name, msg) => println(Exception(name, msg).getmsg())
-          case _ => println("Unknown exception")
+          //case _ => println("Unknown exception") //unnecessary ...
         }
     }
   }
