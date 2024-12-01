@@ -21,7 +21,7 @@ object DZ13_Future extends App{
   } //+(ec)
 
   f.onComplete {
-    case Success(value) => println("OK! value is " + value)
+    case Success(value) => println("OK! value is " + value + Thread.currentThread().getName)
     case Failure(e) => println("ERR - " + e.getMessage)
   }
 
@@ -56,7 +56,7 @@ object DZ13_Future extends App{
   }
 
   Await.result(f7, Duration.Inf)
-  //Await.result(f5, Duration.Inf)
+  //Await.result(f5, Duration.Inf) //ex
   p.shutdown()
 }
 
@@ -88,7 +88,7 @@ object WithoutFutureCoffee2 extends App {
     es <- doEspresso(g, w)
     c  <- combine(es, m)
   } yield c
-
+  pool.shutdown()
 }
 
 object MapMe2 extends App {
