@@ -125,3 +125,25 @@ object ScalaFuture2 extends App{
   p.shutdown()
 }
 
+object ScalaFuture4 extends App {
+
+  def task4(a:Int,b:Int)(implicit f1: Int=>Future[Int], f2:Int=>Future[Int]): Int = {
+    val x = for {
+      g  <- f1(a)
+      w  <- f2(b)
+    } yield g+w
+    Await.result(x,Duration.Inf)
+  }
+
+  //4
+  val p = Executors.newFixedThreadPool(4)
+  implicit val ec: ExecutionContextExecutor = ExecutionContext.fromExecutor(p) //fromExecutorService
+
+  implicit def f1(i: Int)(implicit executor: ExecutionContext): Future[Int] =   Future { println("Value is " + i + " of thread: " +Thread.currentThread().getName); i }
+  //implicit def f2(i: Int)(implicit executor: ExecutionContext): Future[Int]
+  println("Result is: " + task4(5,12))
+  println("Result is: " + task4(2,2))
+  println("Result is: " + task4(97,125))
+
+  p.shutdown()
+}
